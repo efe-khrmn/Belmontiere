@@ -1,6 +1,7 @@
 package com.belmontiere.entity;
 
 import com.belmontiere.entity.enums.CaseMaterial;
+import com.belmontiere.entity.enums.CrystalType;
 import com.belmontiere.entity.enums.Movement;
 import com.belmontiere.entity.enums.StrapType;
 import jakarta.persistence.*;
@@ -46,15 +47,28 @@ public class Watch {
     @Column(length = 30)
     private Movement movement;
 
+    @Column(length = 150)
+    private String caliber;
+
     @Column(name = "case_diameter_mm")
     private Double caseDiameterMm;
 
     @Column(name = "case_thickness_mm")
     private Double caseThicknessMm;
 
+    @Column(name = "lug_to_lug_mm")
+    private Double lugToLugMm;
+
+    @Column(name = "lug_width_mm")
+    private Integer lugWidthMm;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "case_material", length = 30)
     private CaseMaterial caseMaterial;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "crystal_type", length = 30)
+    private CrystalType crystalType;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "strap_type", length = 30)
@@ -66,8 +80,14 @@ public class Watch {
     @Column(name = "water_resistance_m")
     private Integer waterResistanceM;
 
+    @Column(name = "power_reserve_hours")
+    private Integer powerReserveHours;
+
     @Column(name = "dial_color", length = 50)
     private String dialColor;
+
+    @Column(name = "dial_features", length = 255)
+    private String dialFeatures;
 
     @Column(length = 255)
     private String complications;

@@ -32,9 +32,9 @@ public final class WatchMapper {
         List<com.belmontiere.dto.response.ReferencePriceResponse> prices = watch.getReferencePrices() == null
                 ? List.of()
                 : watch.getReferencePrices().stream()
-                        .filter(com.belmontiere.entity.ReferencePrice::isActive)
-                        .map(ReferencePriceMapper::toResponse)
-                        .toList();
+                .filter(com.belmontiere.entity.ReferencePrice::isActive)
+                .map(ReferencePriceMapper::toResponse)
+                .toList();
 
         return new WatchResponse(
                 watch.getId(),
@@ -42,13 +42,19 @@ public final class WatchMapper {
                 watch.getModel(),
                 watch.getReferenceNumber(),
                 watch.getMovement(),
+                watch.getCaliber(),
                 watch.getCaseDiameterMm(),
                 watch.getCaseThicknessMm(),
+                watch.getLugToLugMm(),
+                watch.getLugWidthMm(),
                 watch.getCaseMaterial(),
+                watch.getCrystalType(),
                 watch.getStrapType(),
                 watch.getStrapMaterial(),
                 watch.getWaterResistanceM(),
+                watch.getPowerReserveHours(),
                 watch.getDialColor(),
+                watch.getDialFeatures(),
                 watch.getComplications(),
                 watch.getMsrp(),
                 watch.getCurrency(),
