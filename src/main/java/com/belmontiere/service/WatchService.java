@@ -2,11 +2,13 @@ package com.belmontiere.service;
 
 import com.belmontiere.dto.mapper.WatchMapper;
 import com.belmontiere.dto.request.CreateWatchRequest;
+import com.belmontiere.dto.request.WatchFilterRequest;
 import com.belmontiere.dto.response.WatchResponse;
 import com.belmontiere.dto.response.WatchSummaryResponse;
 import com.belmontiere.entity.Watch;
 import com.belmontiere.exception.ResourceNotFoundException;
 import com.belmontiere.repository.WatchRepository;
+import com.belmontiere.repository.specification.WatchSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,5 +60,11 @@ public class WatchService {
     @Transactional(readOnly = true)
     public Page<WatchSummaryResponse> list(Pageable pageable) {
         return watchRepository.findAll(pageable).map(WatchMapper::toSummary);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<WatchSummaryResponse> search(WatchFilterRequest filterRequest, Pageable pageable) {
+        return watchRepository.findAll(WatchSpecification.withFilter(filterRequest), pageable)
+                .map(WatchMapper::toSummary);
     }
 }

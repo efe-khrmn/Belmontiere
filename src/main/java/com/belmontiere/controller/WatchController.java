@@ -1,6 +1,7 @@
 package com.belmontiere.controller;
 
 import com.belmontiere.dto.request.CreateWatchRequest;
+import com.belmontiere.dto.request.WatchFilterRequest;
 import com.belmontiere.dto.response.WatchResponse;
 import com.belmontiere.dto.response.WatchSummaryResponse;
 import com.belmontiere.service.WatchService;
@@ -35,5 +36,12 @@ public class WatchController {
     public ResponseEntity<Page<WatchSummaryResponse>> list(
             @PageableDefault(size = 20, sort = "brand", direction = Sort.Direction.ASC) Pageable pageable) {
         return ResponseEntity.ok(watchService.list(pageable));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<WatchSummaryResponse>> search(
+            WatchFilterRequest filterRequest,
+            @PageableDefault(size = 20, sort = "brand", direction = Sort.Direction.ASC) Pageable pageable) {
+        return ResponseEntity.ok(watchService.search(filterRequest, pageable));
     }
 }
